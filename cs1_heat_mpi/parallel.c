@@ -133,7 +133,7 @@ MPI_Cart_create(MPI_COMM_WORLD,2,dims,periods,1,&cart);
 MPI_Cart_coords(cart,rank,2,coords);
 rs=n/p+(coords[0]<n%p);
 cs=n;
-decompose_1d(n,p,rank,&istart,&rs);
+decompose_1d(n,p,coords[0],&istart,&rs);
 decompose_2d(n,0,1,&jstart,&cs);
 MPI_Cart_shift(cart,0,-1,&north,&south);
 }
