@@ -17,3 +17,13 @@ mpirun -n 4 ./parallel 1024 500 0.1 50 1d blocking
 mpirun -n 4 ./parallel 1024 500 0.1 50 2d nonblocking
 
 The fixed boundary value is 100.0 and the interior starts at 0.0. Parallel floating-point results should match the serial sum within 1e-9. K controls the MPI_Allreduce convergence check. K=1 checks every step and K=50 checks every 50 steps.
+
+#Plot scaling
+Install the plot dependency:
+sudo apt install python3-matplotlib
+
+python3 plot_scaling.py strong results.csv strong_scaling.png
+python3 plot_scaling.py weak weak_results.csv weak_scaling.png
+
+CSV columns for strong scaling: ranks,t1,time,n
+CSV columns for weak scaling: ranks,time,n
