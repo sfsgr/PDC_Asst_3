@@ -27,3 +27,9 @@ python3 plot_scaling.py weak weak_results.csv weak_scaling.png
 
 CSV columns for strong scaling: ranks,t1,time,n
 CSV columns for weak scaling: ranks,time,n
+
+#Run all heat benchmarks
+python3 run_benchmarks.py 1024 500 3 1,2,4,8 strong_results.csv
+python3 run_benchmarks.py 4096 500 3 1,2,4,8 strong_results_4096.csv
+
+p=8 is oversubscribed when the WSL environment exposes 4 physical cores.
