@@ -67,6 +67,11 @@ int main(int argc,char**argv) {
   printf("Final L1 Residual: %.8e\n",residual);
   printf("Compute Time: %.4f s\n",compute);
   printf("Throughput: %.2f Million edges/s\n",(graph.edge_count*iterations)/(compute*1e6));
+  double rank_sum=0.0;
+  for(int i=0;i<graph.n;i++) {
+    rank_sum+=rank[i];
+  }
+  printf("Rank Sum: %.10f (tolerance=1e-7)\n",rank_sum);
   free(rank);
   free(next);
   free_graph(&graph);

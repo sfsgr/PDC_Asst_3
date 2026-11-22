@@ -84,6 +84,11 @@ int main(int argc,char**argv) {
   printf("Schedule: %s Chunk: %d\n",schedule==0?"static":schedule==1?"dynamic":"guided",chunk);
   printf("Iterations: %d Final L1 Residual: %.8e\n",iterations,residual);
   printf("Compute Time: %.4f s Throughput: %.2f Million edges/s\n",elapsed,(graph.edge_count*iterations)/(elapsed*1e6));
+  double rank_sum=0.0;
+  for(int i=0;i<graph.n;i++) {
+    rank_sum+=rank[i];
+  }
+  printf("Rank Sum: %.10f (tolerance=1e-7)\n",rank_sum);
   free(rank);
   free(next);
   free_graph(&graph);
