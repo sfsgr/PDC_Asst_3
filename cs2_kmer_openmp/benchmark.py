@@ -23,12 +23,12 @@ if __name__=="__main__":
   runs=int(sys.argv[2]) if len(sys.argv)>2 else 3
   output=sys.argv[3] if len(sys.argv)>3 else "kmer_results.csv"
   rows=[]
-  for k in [8,12]:
+  for k in [1,8,12]:
     for threads in [1,2,4,8]:
       for mode in ["serial","race","atomic","private","padded"]:
         if mode=="serial" and threads!=1:
           continue
-        if mode=="padded" and k!=8:
+        if mode=="padded" and k not in [1,8]:
           continue
         median_time,line=run(length,k,mode,threads,0,runs)
         match=re.search(r"throughput=([0-9.]+)M",line)

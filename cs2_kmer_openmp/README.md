@@ -22,3 +22,7 @@ Examples:
 
 #Benchmarks
 python3 benchmark.py 10000000 3 kmer_results.csv
+
+#False-sharing check
+./kmer 10000000 1 private 4 12345 0
+./kmer 10000000 1 padded 4 12345 0
