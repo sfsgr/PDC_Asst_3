@@ -37,6 +37,29 @@ int main(int argc,char**argv) {
     }
     printf("%d-%d: vertices=%d edges=%zu\n",degree_limits[bin],degree_upper[bin],vertex_count,edge_count);
   }
+    FILE *df = fopen("degree_distribution.csv", "w");
+  if (!df) {
+    perror("degree_distribution.csv");
+    return 1;
+  }
+
+  int *degree_count = calloc((size_t)graph.n, sizeof(int));
+
+  for (int v = 0; v < graph.n; v++) {
+    degree_count[graph.in_degree[v]]++;
+  }
+
+  fprintf(df, "degree,count\n");
+
+  for (int d = 1; d < graph.n; d++) {
+    if (degree_count[d] > 0) {
+      fprintf(df, "%d,%d\n", d, degree_count[d]);
+    }
+  }
+
+  fclose(df);
+  free(degree_count);
+  printf("Degree distribution saved to degree_distribution.csv\n");
   double*thread_time=(double*)calloc((size_t)threads,sizeof(double));
   size_t*thread_edges=(size_t*)calloc((size_t)threads,sizeof(size_t));
   for(int iteration=0;iteration<10;iteration++) {
